@@ -1,3 +1,3 @@
-C:/Users/cassi/CLionProjects/TPprogramacao/cmake-build-debug/CMakeFiles/TPprogramacao.dir
-C:/Users/cassi/CLionProjects/TPprogramacao/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/cassi/CLionProjects/TPprogramacao/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+D:/Clion/TPprogramacao/cmake-build-debug/CMakeFiles/TPprogramacao.dir
+D:/Clion/TPprogramacao/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Clion/TPprogramacao/cmake-build-debug/CMakeFiles/rebuild_cache.dir
