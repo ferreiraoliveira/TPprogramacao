@@ -7,6 +7,7 @@ typedef struct {
     int quantidade;
     char unidade[10];
     char categorias[20];
+    int contagem;
     struct item *next;
 } item;
 
@@ -36,6 +37,15 @@ void adicionar(item *headitem){
     }
 
 }
+void contagems(item *headitem){
+    int i = 0;
+    while(headitem != NULL) {
+        i++;
+        printf("%s\n", headitem->nome);
+        headitem = headitem->next;
+    }
+}
+
 void remover(item *headitem){
     char nome[20];
     int quantidade;
@@ -46,15 +56,21 @@ void remover(item *headitem){
     while(headitem != NULL){
         if (strcmp(headitem->nome,nome) == 0 ){
             headitem->quantidade = headitem->quantidade - quantidade;
+            headitem->contagem = headitem->contagem + quantidade;
         }headitem = headitem->next;
     }
 
 }
-/*void remover_produto(item *headitem){
+void produto_necessario(item *headitem){
 
+    while(headitem != NULL){
+        if (headitem->quantidade < 100){
+            printf("E preciso encomendar : %s \n", headitem->nome);
+        }headitem = headitem->next;
+    }
     }
 
-}*/
+
 void addiciona_item(item *headitem){
     item *newitem = malloc(sizeof(item));
     printf("Escreva o nome\n");
@@ -65,6 +81,7 @@ void addiciona_item(item *headitem){
     scanf("%s", &newitem->unidade);
     printf("Escreva a categoria\n");
     scanf("%s", &newitem->categorias);
+    newitem->contagem = 0;
     newitem->next = headitem;
     head = newitem;
 }
@@ -117,8 +134,9 @@ int main() {
         printf("2.Stock\n");
         printf("3.Adicionar Stock\n");
         printf("4.Remover Stock\n");
-        printf("5.Remover Produto\n");
-        printf("6.Sair\n");
+        printf("5.Produtos Necessarios\n");
+        printf("6.Mais Vendidos\n");
+        printf("7.Sair\n");
 
         scanf("%d", &opcao);
         switch (opcao) {
@@ -133,12 +151,16 @@ int main() {
                 break;
             case 4:
                 remover(head);
-            /*case 5:
-                remover_produto(head);*/
+            case 5:
+                produto_necessario(head);
+                break;
+            case 6:
+                contagems(head);
+                break;
 
         }
 
-    } while (opcao != 6);
+    } while (opcao != 7);
 
     gravar(head);
 
