@@ -6,6 +6,7 @@ typedef struct {
     char nome[20];
     int quantidade;
     char unidade[10];
+    char categorias[20];
     struct item *next;
 } item;
 
@@ -15,7 +16,7 @@ item *head = NULL;
 void listaitems(item *headitem){
 
     while(headitem != NULL){
-        printf("%s - %d - %s \n", headitem->nome , headitem->quantidade , headitem->unidade);
+        printf("%s - %d - %s - %s \n", headitem->nome , headitem->quantidade , headitem->unidade , headitem->categorias);
         headitem = headitem->next;
     }
 
@@ -28,18 +29,32 @@ void adicionar(item *headitem){
     scanf("%s",&nome);
     printf("Que quantidade gostaria de adicionar ?\n");
     scanf("%d",&quantidade);
-    printf("%d",quantidade);
     while(headitem != NULL){
-        printf("%s\n", headitem->nome);
         if (strcmp(headitem->nome,nome) == 0 ){
-            printf("%d \n",headitem->quantidade);
             headitem->quantidade = headitem->quantidade + quantidade;
-            printf("%d \n",headitem->quantidade);
         }headitem = headitem->next;
     }
 
 }
+void remover(item *headitem){
+    char nome[20];
+    int quantidade;
+    printf("A que gostaria de Remover ?\n");
+    scanf("%s",&nome);
+    printf("Que quantidade gostaria de Remover ?\n");
+    scanf("%d",&quantidade);
+    while(headitem != NULL){
+        if (strcmp(headitem->nome,nome) == 0 ){
+            headitem->quantidade = headitem->quantidade - quantidade;
+        }headitem = headitem->next;
+    }
 
+}
+/*void remover_produto(item *headitem){
+
+    }
+
+}*/
 void addiciona_item(item *headitem){
     item *newitem = malloc(sizeof(item));
     printf("Escreva o nome\n");
@@ -48,9 +63,12 @@ void addiciona_item(item *headitem){
     scanf("%d", &newitem->quantidade);
     printf("Escreva a unidade\n");
     scanf("%s", &newitem->unidade);
+    printf("Escreva a categoria\n");
+    scanf("%s", &newitem->categorias);
     newitem->next = headitem;
     head = newitem;
 }
+
 
 void gravar( item *headitem){
     FILE *file;
@@ -59,7 +77,7 @@ void gravar( item *headitem){
         exit(1);
     }
     while(headitem != NULL) {
-        fprintf(file, "%s ;%d ;%s \n",headitem->nome ,headitem->quantidade,headitem->unidade);
+        fprintf(file, "%s ;%d ;%s \n",headitem->nome ,headitem->quantidade,headitem->unidade,headitem->categorias);
         headitem = headitem->next;
     }
     fclose(file);
@@ -74,10 +92,12 @@ void ler (){
     char nome[20];
     int quantidade;
     char unidade[10];
-    while (fscanf(file, "%s ;%d ;%s \n", nome, &quantidade, unidade) > 1) {
+    char categorias[20];
+    while (fscanf(file, "%s ;%d ;%s ;%s ; \n", nome, &quantidade, unidade, categorias) > 1) {
         item *newitem = malloc(sizeof(item));
         strcpy(newitem->nome , nome);
         strcpy(newitem->unidade , unidade);
+        strcpy(newitem->categorias , categorias);
         newitem->quantidade = quantidade;
         newitem->next = head;
         head = newitem;
@@ -95,8 +115,10 @@ int main() {
         printf("Escolha uma opção\n");
         printf("1.Novo item\n");
         printf("2.Stock\n");
-        printf("3.Adicionar\n");
-        printf("5.Sair\n");
+        printf("3.Adicionar Stock\n");
+        printf("4.Remover Stock\n");
+        printf("5.Remover Produto\n");
+        printf("6.Sair\n");
 
         scanf("%d", &opcao);
         switch (opcao) {
@@ -109,9 +131,14 @@ int main() {
             case 3:
                 adicionar(head);
                 break;
+            case 4:
+                remover(head);
+            /*case 5:
+                remover_produto(head);*/
+
         }
 
-    } while (opcao != 4);
+    } while (opcao != 6);
 
     gravar(head);
 
