@@ -13,9 +13,6 @@
   <component name="ChangeListManager">
     <list default="true" id="bfb03a1d-16a5-4314-b0df-851506ced443" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TPprogramacao.dir/main.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TPprogramacao.dir/main.c.obj" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TPprogramacao.dir/objects.a" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/TPprogramacao.dir/objects.a" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cmake-build-debug/TPprogramacao.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/TPprogramacao.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/main.c" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -34,7 +31,7 @@
   <component name="ProjectId" id="1V5Bz8iYNpiMTrCRHWlQAGIox22" />
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/exercicios de programação/Apontador que conta o nmr de letras" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -69,7 +66,9 @@
       <workItem from="1578672437599" duration="184000" />
       <workItem from="1578682718614" duration="3629000" />
       <workItem from="1578763147665" duration="3174000" />
-      <workItem from="1578941803288" duration="4039000" />
+      <workItem from="1578941803288" duration="4120000" />
+      <workItem from="1578949323931" duration="24000" />
+      <workItem from="1579105368183" duration="1935000" />
     </task>
     <servers />
   </component>
@@ -88,16 +87,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.c</url>
-          <line>39</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

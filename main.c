@@ -157,10 +157,13 @@ int main() {
             case 6:
                 contagems(head);
                 break;
+            case 7:
+                contagems(head);
+                break;
 
         }
 
-    } while (opcao != 7);
+    } while (opcao != 8);
 
     gravar(head);
 
