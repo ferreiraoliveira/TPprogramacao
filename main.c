@@ -17,7 +17,7 @@ item *head = NULL;
 void listaitems(item *headitem){
 
     while(headitem != NULL){
-        printf("%s - %d - %s - %s \n", headitem->nome , headitem->quantidade , headitem->unidade , headitem->categorias);
+        printf("%s - %d - %s - %s - %d \n", headitem->nome , headitem->quantidade , headitem->unidade , headitem->categorias, headitem->contagem);
         headitem = headitem->next;
     }
 
@@ -37,12 +37,27 @@ void adicionar(item *headitem){
     }
 
 }
-void contagems(item *headitem){
-    int i = 0;
-    while(headitem != NULL) {
-        i++;
-        printf("%s\n", headitem->nome);
-        headitem = headitem->next;
+
+void categorias(item *headitem){
+    char categoria[20];
+
+    printf("Qual categoria ?\n");
+    scanf("%s",&categoria);
+
+    while(headitem != NULL){
+        if (strcmp(headitem->categorias,categoria) == 0 ){
+            printf("%s - %d - %s - %s \n", headitem->nome , headitem->quantidade , headitem->unidade , headitem->categorias);
+        }headitem = headitem->next;
+    }
+
+}
+
+void produto_necessario(item *headitem){
+
+    while(headitem != NULL){
+        if (headitem->quantidade < 100){
+            printf("E preciso encomendar : %s \n", headitem->nome);
+        }headitem = headitem->next;
     }
 }
 
@@ -61,16 +76,11 @@ void remover(item *headitem){
     }
 
 }
-void produto_necessario(item *headitem){
+/*void remover_produto(item *headitem){
 
-    while(headitem != NULL){
-        if (headitem->quantidade < 100){
-            printf("E preciso encomendar : %s \n", headitem->nome);
-        }headitem = headitem->next;
-    }
     }
 
-
+}*/
 void addiciona_item(item *headitem){
     item *newitem = malloc(sizeof(item));
     printf("Escreva o nome\n");
@@ -86,6 +96,37 @@ void addiciona_item(item *headitem){
     head = newitem;
 }
 
+void contagem(item *headitem){
+    int contagem[1000];
+    int i=0;
+    int a=1;
+    while(headitem != NULL){
+        i++;
+        for(a; a<=i;a++){
+            contagem[a] = headitem->contagem;
+        }
+
+
+        for (int b = 0; b <= i ; b++) {
+            for (int j = b+1; j <=i; j++) {
+                if (contagem[i] > contagem[j]){
+                    int aux = contagem[j];
+                    contagem[j]= contagem[i];
+                    contagem[i]= aux;
+                }
+
+            }
+
+        }
+
+        if (headitem->contagem == contagem[1]) {
+            printf("O mais requesitado é: %s %d \n", headitem->nome, headitem->contagem);
+        }headitem=headitem->next;
+
+    }
+
+}
+
 
 void gravar( item *headitem){
     FILE *file;
@@ -94,7 +135,7 @@ void gravar( item *headitem){
         exit(1);
     }
     while(headitem != NULL) {
-        fprintf(file, "%s ;%d ;%s \n",headitem->nome ,headitem->quantidade,headitem->unidade,headitem->categorias);
+        fprintf(file, "%s ;%d ;%s ;%s ;%d \n",headitem->nome ,headitem->quantidade,headitem->unidade,headitem->categorias,headitem->contagem);
         headitem = headitem->next;
     }
     fclose(file);
@@ -110,12 +151,14 @@ void ler (){
     int quantidade;
     char unidade[10];
     char categorias[20];
-    while (fscanf(file, "%s ;%d ;%s ;%s ; \n", nome, &quantidade, unidade, categorias) > 1) {
+    int contagem;
+    while (fscanf(file, "%s ;%d ;%s ;%s ;%d \n", nome, &quantidade, unidade, categorias, &contagem) > 1) {
         item *newitem = malloc(sizeof(item));
         strcpy(newitem->nome , nome);
         strcpy(newitem->unidade , unidade);
         strcpy(newitem->categorias , categorias);
         newitem->quantidade = quantidade;
+        newitem->contagem = contagem;
         newitem->next = head;
         head = newitem;
     }
@@ -134,9 +177,10 @@ int main() {
         printf("2.Stock\n");
         printf("3.Adicionar Stock\n");
         printf("4.Remover Stock\n");
-        printf("5.Produtos Necessarios\n");
-        printf("6.Mais Vendidos\n");
-        printf("7.Sair\n");
+        printf("5.Produtos por Categoria\n");
+        printf("6.Produtos necessarios\n");
+        printf("7.Mais requesitado\n");
+        printf("8.Sair\n");
 
         scanf("%d", &opcao);
         switch (opcao) {
@@ -151,16 +195,16 @@ int main() {
                 break;
             case 4:
                 remover(head);
+                break;
             case 5:
-                produto_necessario(head);
+                categorias(head);
                 break;
             case 6:
-                contagems(head);
+                produto_necessario(head);
                 break;
             case 7:
-                contagems(head);
+                contagem(head);
                 break;
-
         }
 
     } while (opcao != 8);
