@@ -100,6 +100,7 @@ void contagem(item *headitem){
     int contagem[1000];
     int i=0;
     int a=1;
+    int w=0;
     while(headitem != NULL){
         i++;
         for(a; a<=i;a++){
@@ -119,10 +120,15 @@ void contagem(item *headitem){
 
         }
 
-        if (headitem->contagem == contagem[1]) {
-            printf("O mais requesitado é: %s %d \n", headitem->nome, headitem->contagem);
-        }headitem=headitem->next;
-
+        if (w == 0){
+            w++;
+            headitem = headitem->next;
+        } else {
+            if (headitem->contagem == contagem[1]) {
+                printf("O mais requesitado é: %s %d \n", headitem->nome, headitem->contagem);
+            }
+            headitem = headitem->next;
+        }
     }
 
 }
